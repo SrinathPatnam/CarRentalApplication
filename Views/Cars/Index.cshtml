@@ -1,0 +1,89 @@
+﻿@model PaginatedList<CarRentalApplication.Models.Car>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="background-color:lightgoldenrodyellow">
+    <h1>Cars</h1>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create">Add New Car</a>
+        </p>
+    }
+</div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Location: <input type="text" name="SearchLocation" value="@ViewData["CurrentFilterLocation"]" />
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+        </p>
+    </div>
+</form>
+<table class="table" style="background-color:lightcyan">
+    <thead>
+        <tr>
+            <th> Car Name </th>
+            <th> Car Type </th>
+            <th> Location </th>            
+            <th>
+               Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cartype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Carid">Edit |</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Carid">Details</a>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Carid">| Delete |</a>
+                    }
+                </td>
+
+                <td><a asp-controller="Bookings" asp-action="Create" asp-route-id="@item.Carid">Book</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilterLocation="@ViewData["CurrentFilterLocation"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilterLocation="@ViewData["CurrentFilterLocation"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

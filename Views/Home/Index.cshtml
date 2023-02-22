@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CarRentalApplication.Models.Car>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" style="background-color:lightgoldenrodyellow">
+    <h2>Welcome</h2>
+    <p>Find various cars and book a car of your choice</p>
+</div>
+
+<table class="table" style="background-color:lightcyan">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Carname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cartype)
+            </th>            
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cartype)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>               
+            </tr>
+        }
+    </tbody>
+</table>

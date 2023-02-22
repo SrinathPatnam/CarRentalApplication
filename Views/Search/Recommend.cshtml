@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CarRentalApplication.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Cars that matched your preferences</h2>
+
+<hr />
+<h3>RECOMMENDED</h3>
+<div class="row card-deck">
+    @foreach (var item in ViewData["recommendList"] as IEnumerable<CarRentalApplication.Models.Car>)
+    {
+        <div class="card shadow">
+            <div class="card-header" style="height:200px;">
+                <img class="card-img-top" src="~/img/@Html.DisplayFor(modelItem => item.Image)" alt="Car" style="height:100%;">
+            </div>
+            <div class="card-body" style="text-align:center;">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Carname)</h4>
+                <h5 class="card-text" style="color: dodgerblue"><b>C$ @Html.DisplayFor(modelItem => item.Price)</b><small>per hour</small></h5>
+                <p class="card-text">
+                    <i class="fa fa-user" data-toggle="tooltip" title="Passengers" data-placement="top"></i> @Html.DisplayFor(modelItem => item.Category.Seats) &nbsp;
+                    <i class="fa fa-suitcase" data-toggle="tooltip" title="large bags" data-placement="top"></i> @Html.DisplayFor(modelItem => item.Category.Bags)
+                </p>
+
+            </div>
+            <div class="card-footer" style="text-align:center;">
+                <a asp-action="Create" asp-area="" asp-controller="Bookings"
+                   asp-route-id="@item.Carid" class="btn btn-primary">Book</a>
+            </div>
+        </div>
+    }
+</div>
+<br />
+<br />
+
+<hr />
+<h3>Other Result</h3>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4" style="margin: 20px auto;">
+            <div class="card shadow">
+                <div class="card-header" style="height:200px;">
+                    <img class="card-img-top" src="~/img/@Html.DisplayFor(modelItem => item.Image)" alt="Car" style="height:100%;">
+                </div>
+                <div class="card-body" style="text-align:center;">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.Carname)</h4>
+                    <h5 class="card-text" style="color: dodgerblue"><b>C$@Html.DisplayFor(modelItem => item.Price)</b><small>per hour</small></h5>
+                    <p class="card-text">
+                        <i class="fa fa-user" data-toggle="tooltip" title="Passengers" data-placement="top"></i> @Html.DisplayFor(modelItem => item.Category.Seats) &nbsp;
+                        <i class="fa fa-suitcase" data-toggle="tooltip" title="large bags" data-placement="top"></i> @Html.DisplayFor(modelItem => item.Category.Bags)
+                    </p>
+
+                </div>
+                <div class="card-footer" style="text-align:center;">
+                    <a asp-action="Create" asp-area="" asp-controller="Bookings"
+                       asp-route-id="@item.Carid" class="btn btn-primary">Book</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+

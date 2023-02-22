@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="text-center" style="background-color:lightgoldenrodyellow">
+    <h3>Find your perfect match</h3>
+    <p>Answer a few quick questions to get your perfect vehicle for rent.</p>
+</div>
+
+<div class="row">
+    <form asp-action="Recommend">
+        <div class="form-group">
+            <label class="control-label">Max Budget(per day)</label>
+            <select class="form-control" name="budget">
+                <option value="30" selected>$30</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+                <option value="120">$120</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">No. of Seats</label>
+            <select class="form-control" name="seats">
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">No. of Bags</label>
+            <select class="form-control" name="bags">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Suitable for</label>
+            <select class="form-control" name="bestFor">
+                <option value="Mini" selected>City trips</option>
+                <option value="Mini Economy">City and short trips</option>
+                <option value="Compact">City and mid-length trips</option>
+                <option value="Compact State">City and mid-length trips with extra luggage</option>
+                <option value="Intermediate">Mid-length to long trips</option>
+                <option value="Intermediate Standard">Mid-length to long trips with extra comfort</option>
+                <option value="Full-Size">Long trips, extra comfort and better performance</option>
+                <option value="Luxury">Traveling in styles</option>
+                <option value="Full-Size SUV">Long trips and rural roads</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
